@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#my-slider {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.slider-list ul {
+  list-style-type: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.slider-list ul img {
+  width: 500px;
+}
+
+.slider-list__item,
+.slider-list__item--selected {
+  position: absolute;
+  transition: opacity 1s;
+  opacity: 0;
+  text-align: center;
+}
+
+.slider-list__item--selected {
+  transition: opacity 1s;
+  opacity: 1;
+}
+
+.slider-list__control {
+  z-index: 99;
+  position: absolute;
+  right: 45%;
+  bottom: 10px;
+}
+
+.slider-list__control-buttons,
+.slider-list__control-buttons--selected {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+
+.slider-list__control-buttons--selected {
+  background-color: rgb(69, 72, 86);
+}
+
+.slider-btn {
+  outline: 0;
+  border: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 99;
+  font-size: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+#slider-btn__prev {
+  left: 10px;
+}
+
+#slider-btn__next {
+  right: 10px;
+}

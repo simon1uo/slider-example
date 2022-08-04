@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>slider-example</title>
+</head>
+
+<body>
+  <div id="my-slider" class="slider-list">
+    <ul>
+      <li class="slider-list__item">
+        <img src="https://source.unsplash.com/random/500x500/?dog">
+      </li>
+      <li class="slider-list__item">
+        <img src="https://source.unsplash.com/random/500x500/?fish">
+      </li>
+      <li class="slider-list__item">
+        <img src="https://source.unsplash.com/random/500x500/?blackcat">
+      </li>
+      <li class="slider-list__item--selected">
+        <img src="https://source.unsplash.com/random/500x500/?cat">
+      </li>
+    </ul>
+    <button class="slider-btn" id="slider-btn__prev">⬅️</button>
+    <button class="slider-btn" id="slider-btn__next">➡️</button>
+    <div class="slider-list__control">
+      <span class="slider-list__control-buttons--selected"></span>
+      <span class="slider-list__control-buttons"></span>
+      <span class="slider-list__control-buttons"></span>
+      <span class="slider-list__control-buttons"></span>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

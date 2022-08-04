@@ -52,6 +52,7 @@ body {
 .slider-list__control-buttons,
 .slider-list__control-buttons--selected {
   display: inline-block;
+  margin-right: 5px;
   width: 10px;
   height: 10px;
   border-radius: 50%;

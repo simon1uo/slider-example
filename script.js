@@ -4,53 +4,6 @@ class Slider {
     this.items = this.container.querySelectorAll(
       ".slider-list__item, .slider-list__item--selected"
     );
-
-    const controller = this.container.querySelector(".slider-list__control");
-    const controlBtns = this.container.querySelectorAll(
-      ".slider-list__control-buttons, .slider-list__control-buttons--selected"
-    );
-
-    controller.addEventListener("mouseover", (event) => {
-      const index = Array.from(controlBtns).indexOf(event.target);
-      if (index >= 0) {
-        this.slideTo(index);
-        this.stop();
-      }
-    });
-
-    controller.addEventListener("mouseout", () => {
-      this.start();
-    });
-
-    this.container.addEventListener("slide", (event) => {
-      const index = event.detail.index;
-      const selected = controller.querySelector(
-        ".slider-list__control-buttons--selected"
-      );
-      if (selected) {
-        selected.className = "slider-list__control-buttons";
-        controlBtns[index].className = "slider-list__control-buttons--selected";
-      }
-    });
-
-    const prevBtn = document.querySelector("#slider-btn__prev");
-    const nextBtn = document.querySelector("#slider-btn__next");
-
-    prevBtn.addEventListener("click", (event) => {
-      console.log("prev");
-      this.stop();
-      this.slidePrevious();
-      this.start();
-      event.preventDefault();
-    });
-
-    nextBtn.addEventListener("click", (event) => {
-      console.log("next");
-      this.stop();
-      this.slideNext();
-      this.start();
-      event.preventDefault();
-    });
   }
 
   getSelectedItem() {
@@ -102,7 +55,62 @@ class Slider {
   stop() {
     clearInterval(this._timer);
   }
+
+  registerPlugins(...plugins) {
+    plugins.forEach((plugin) => plugin(this));
+  }
 }
 
+const pluginController = (slider) => {
+  const controller = slider.container.querySelector(".slider-list__control");
+  const controlBtns = slider.container.querySelectorAll(
+    ".slider-list__control-buttons, .slider-list__control-buttons--selected"
+  );
+
+  controller.addEventListener("mouseover", (event) => {
+    const index = Array.from(controlBtns).indexOf(event.target);
+    if (index >= 0) {
+      slider.slideTo(index);
+      slider.stop();
+    }
+  });
+
+  controller.addEventListener("mouseout", () => {
+    slider.start();
+  });
+
+  slider.container.addEventListener("slide", (event) => {
+    const index = event.detail.index;
+    const selected = controller.querySelector(
+      ".slider-list__control-buttons--selected"
+    );
+    if (selected) {
+      selected.className = "slider-list__control-buttons";
+      controlBtns[index].className = "slider-list__control-buttons--selected";
+    }
+  });
+};
+
+const pluginPrevious = (slider) => {
+  const prevBtn = document.querySelector("#slider-btn__prev");
+  prevBtn.addEventListener("click", (event) => {
+    slider.stop();
+    slider.slidePrevious();
+    slider.start();
+    event.preventDefault();
+  });
+};
+
+const pluginNext = (slider) => {
+  const nextBtn = document.querySelector("#slider-btn__next");
+  nextBtn.addEventListener("click", (event) => {
+    slider.stop();
+    slider.slideNext();
+    slider.start();
+    event.preventDefault();
+  });
+};
+
 const slider = new Slider("my-slider");
+slider.registerPlugins(pluginController, pluginPrevious, pluginNext);
 slider.start();
